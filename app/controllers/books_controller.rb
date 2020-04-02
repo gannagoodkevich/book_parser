@@ -4,7 +4,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    if params[:genre_id]
+      @genre = Genre.find_by(id: params[:genre_id])
+      @books = @genre.books
+    else
+      @books = Book.all
+    end
+    @genres = Genre.all
   end
 
   def create
