@@ -1,1 +1,1 @@
-$("#book-id-<%=@book.id%>").hide()
+$("#books-list").html("<%= j render(partial: 'books/book', collection: @books) %>")

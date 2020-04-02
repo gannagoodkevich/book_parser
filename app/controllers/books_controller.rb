@@ -25,7 +25,11 @@ class BooksController < ApplicationController
 
   def destroy
     @book = Book.find_by(id: params[:id])
+    @books = Book.all
     @book.destroy!
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
