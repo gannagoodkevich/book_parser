@@ -1,14 +1,16 @@
 <div class="my-row">
   <div class="col-sm-3">
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-9">
     <p></p>
     <h1>Books</h1>
     <p></p>
     <div id="new-book">
-      <%= button_to 'Create post', new_book_path, method: :get, class: "btn btn-primary", remote: true %>
+      <%= render partial: 'books/create_button'%>
     </div>
     <p></p>
-    <%= render partial: 'books/book', collection: @books %>
+    <div id="books-list">
+      <%= render partial: 'books/book', collection: @books %>
+    </div>
   </div>
 </div>

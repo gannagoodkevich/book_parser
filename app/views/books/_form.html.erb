@@ -1,0 +1,13 @@
+<div class="card-body">
+  <%= bootstrap_form_with model: book, url: url, remote: true do |form| %>
+    <p>
+      <%= form.text_area :title%>
+    </p>
+
+    <p>
+      <%= form.text_area :author%>
+    </p>
+
+    <%= form.submit "Create", class: "btn btn-primary"%>
+  <% end %>
+</div>

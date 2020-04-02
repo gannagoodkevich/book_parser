@@ -9,6 +9,23 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.create!(book_params)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit
+    @book = Book.find_by(id: params[:id])
+  end
+
+  def update
+    @book = Book.find_by(id: params[:id])
+    @book.update!(book_params)
+  end
+
+  def destroy
+    @book = Book.find_by(id: params[:id])
+    @book.destroy!
   end
 
   private
