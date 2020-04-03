@@ -8,6 +8,10 @@
       <%= form.text_area :author%>
     </p>
 
+    <p>
+      <%= form.collection_select :genre_id, genres, :id, :title, {class: "form-control"}%>
+    </p>
+
     <%= form.submit "Create", class: "btn btn-primary"%>
   <% end %>
 </div>

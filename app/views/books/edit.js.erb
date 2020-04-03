@@ -1,1 +1,1 @@
-$("#book-id-<%=@book.id%>").html("<%= j render(partial: 'form', locals: {book: @book, url: book_path}) %>");
+$("#book-id-<%=@book.id%>").html("<%= j render(partial: 'form', locals: {book: @book, url: book_path, genres: @genres}) %>");

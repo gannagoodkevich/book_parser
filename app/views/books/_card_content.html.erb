@@ -1,6 +1,9 @@
 <div class="card-body">
   <h4 class="card-title"><%= book.title%></h4>
   <h5 class="card-title"><%= book.author%></h5>
+  <%if book.genre %>
+    <span class="d-md-inline-flex badge badge-pill badge-secondary"><%= link_to book.genre.title, books_path(genre_id: book.genre.id), style: "color:#ffffff", remote: true%></span>
+  <%end %>
   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   <%= link_to edit_book_path(id: book.id), class: "card-link", remote: true do %>
     Edit

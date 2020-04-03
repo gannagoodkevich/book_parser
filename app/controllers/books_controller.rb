@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   def new
     @book = Book.new
+    @genres = Genre.all
   end
 
   def index
@@ -8,13 +9,19 @@ class BooksController < ApplicationController
       @genre = Genre.find_by(id: params[:genre_id])
       @books = @genre.books
     else
-      @books = Book.all
+      if params[:order]
+        @books = Book.order(title: :desc)
+      else
+        @books = Book.order(title: :asc)
+      end
     end
     @genres = Genre.all
   end
 
   def create
-    @book = Book.create!(book_params)
+    @genre = Genre.find_by(id: params[:book][:genre_id])
+    puts @genre
+    @book = @genre.books.create!(book_params)
     respond_to do |format|
       format.js
     end
@@ -22,6 +29,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find_by(id: params[:id])
+    @genres = Genre.all
   end
 
   def update
@@ -38,9 +46,17 @@ class BooksController < ApplicationController
     end
   end
 
+  def sort
+    @books = Book.order(title: :desc)
+    @genres = Genre.all
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:title, :author)
+    params.require(:book).permit(:title, :author, :genre_id)
   end
 end
