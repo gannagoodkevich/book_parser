@@ -12,6 +12,14 @@
       <%= form.collection_select :genre_id, genres, :id, :title, {class: "form-control"}%>
     </p>
 
+    <p>
+      <%= form.collection_select :status_id, statuses, :id, :status_title, {class: "form-control"}%>
+    </p>
+
+    <p>
+      <%= form.collection_select :cover_id, covers, :id, :cover_type, {class: "form-control"}%>
+    </p>
+
     <%= form.submit "Create", class: "btn btn-primary"%>
   <% end %>
 </div>

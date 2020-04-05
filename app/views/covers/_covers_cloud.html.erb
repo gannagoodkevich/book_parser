@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <h3 class="card-header">Covers:</h3>
+  <div class="card-body">
+    <ul>
+      <p>
+        <% covers.each do |cover|%>
+          <span class="d-md-inline-flex badge badge-pill badge-secondary"><%= link_to cover.cover_type, books_path(cover_id: cover.id), style: "color:#ffffff", remote: true%></span>
+        <% end %>
+      </p>
+    </ul>
+  </div>
+</div>

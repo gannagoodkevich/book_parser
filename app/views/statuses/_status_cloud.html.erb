@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <h3 class="card-header">Statuses:</h3>
+  <div class="card-body">
+    <ul>
+      <p>
+        <% statuses.each do |status|%>
+          <span class="d-md-inline-flex badge badge-pill badge-secondary"><%= link_to status.status_title, books_path(status_id: status.id), style: "color:#ffffff", remote: true%></span>
+        <% end %>
+      </p>
+    </ul>
+  </div>
+</div>

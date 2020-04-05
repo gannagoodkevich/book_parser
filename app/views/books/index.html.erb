@@ -5,12 +5,16 @@
   <div class="col-sm-3">
     <p></p>
     <%= render partial: 'genres/genre_cloud', locals: {genres: @genres} %>
+    <p></p>
+    <%= render partial: 'statuses/status_cloud', locals: {statuses: @statuses} %>
+    <p></p>
+    <%= render partial: 'covers/covers_cloud', locals: {covers: @covers} %>
   </div>
   <div class="col-sm-9">
     <p></p>
     <h1>Books</h1>
     <p></p>
-    <div id="new-book">
+    <div class="col-sm-6" id="new-book">
       <%= render partial: 'books/create_button'%>
     </div>
     <p></p>
