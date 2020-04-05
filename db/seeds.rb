@@ -1,5 +1,6 @@
 require '/media/asus/Ann/Films/servises/web_site_parser.rb'
-
+# TODO: refactor threads for parsing elements, not for links!!!
+#
 parser = WebSiteParser.new("https://biblio.by/biblio-books.html?cat=4921")
 
 parser.book_genres_links.each do |key, value|
@@ -14,6 +15,7 @@ parser.book_genres_links.each do |key, value|
       links << value + "&p=#{i+1}"
     end
   end
+  genre = Genre.create!(title: key)
 
   links_sliced = links.each_slice(4)
   links_sliced.each do |links|
@@ -22,7 +24,6 @@ parser.book_genres_links.each do |key, value|
         begin
           page = Nokogiri::HTML(Curl.get(url).body_str)
           page.search('//div[@class = "des-container"]').each do |name|
-            genre = Genre.create!(title: key)
             genre.books.create!(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content)
           end
         ensure
