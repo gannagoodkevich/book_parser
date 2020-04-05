@@ -1,4 +1,4 @@
-$("#books-list").html("<%= j render(partial: 'books/book', collection: @books) %>");
+$("#pagination").html("<%= j render(partial: 'books/book_paginator', locals: {books: @books}) %>");
 $("#order-panel").html("<%= j render(partial: 'books/order_tab') %>");
 <% if @genre || @status || @cover %>
   $("#new-book").hide();

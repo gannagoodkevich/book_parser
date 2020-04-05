@@ -55,34 +55,3 @@ class WebSiteParser
     content.content.gsub(/\n+/, '').gsub(/\([0-9]+\)/, '').strip
   end
 end
-
-parser = WebSiteParser.new("https://biblio.by/biblio-books.html?cat=4921")
-puts parser.book_covers_links
-puts parser.book_covers_numbers
-
-parser.book_covers_links.each do |key, value|
-  links = []
-  threads = []
-  puts value
-  num_of_pages = parser.book_covers_numbers[key] / 96
-  if num_of_pages == 0
-    links << value
-  else
-    num_of_pages.times do |i|
-      links << value + "&p=#{i+1}"
-    end
-  end
-  puts key + "--->"
-  puts links
-
-  links.each do |link|
-    threads << Thread.new(link) do |url|
-      page = Nokogiri::HTML(Curl.get(url).body_str)
-      page.search('//div[@class = "des-container"]').each do |name|
-        puts name.search('div[@class = "product-name"]').first.content + " Written by: " + name.search('p[@class = "author"]').first.content
-      end
-      #puts page.search('//div[@class = "des-container"]').size
-    end
-  end
-  threads.each {|thread| thread.join}
-end
