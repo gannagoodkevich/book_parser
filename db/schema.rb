@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_200232) do
   end
 
   create_table "covers", force: :cascade do |t|
-    t.string "type"
+    t.string "cover_type"
     t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CoverTest < ActiveSupport::TestCase
+class GenresControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

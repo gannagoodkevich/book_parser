@@ -1,0 +1,27 @@
+<div class="card-body">
+  <h3 class="card-title"><%= book.title%></h3>
+  <h5 class="card-title"><%= book.author%></h5>
+  <p>
+  <b>Genre: </b>
+  <%if book.genre %>
+    <span class="d-md-inline-flex badge badge-pill badge-secondary"><%= link_to book.genre.title, books_path(genre_id: book.genre.id), style: "color:#ffffff", remote: true%></span>
+  <%end %>
+  <p>
+  <b>Status: </b>
+  <%if book.status %>
+    <%= book.status.status_title %>
+  <%end %>
+  <p>
+  <b>Cover: </b>
+  <% if book.cover %>
+    <%= book.cover.cover_type %>
+  <%end %>
+  <p>
+
+  <%= link_to edit_book_path(id: book.id), class: "card-link", remote: true do %>
+    Edit
+  <% end %>
+  <%= button_to 'Destroy', book_path(id: book.id),
+                method: :delete,
+                data: { confirm: 'Are you sure?' }, class:  "btn btn-danger", remote: true%>
+</div>

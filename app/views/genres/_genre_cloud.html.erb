@@ -1,0 +1,13 @@
+<div class="card mb-3">
+  <h3 class="card-header">Genres:</h3>
+  <div class="card-body">
+    <%= link_to 'All books', books_path%>
+    <ul>
+        <p>
+          <% genres.each do |genre|%>
+            <span class="d-md-inline-flex badge badge-pill badge-secondary"><%= link_to genre.title, books_path(genre_id: genre.id), style: "color:#ffffff", remote: true%></span>
+          <% end %>
+        </p>
+    </ul>
+  </div>
+</div>

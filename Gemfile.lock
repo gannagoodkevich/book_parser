@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/thomaspark/bootswatch.git
+  revision: 446c8b7ed67f9ed86e4d3c95d3d975582f3d5f61
+  specs:
+    bootswatch (4.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,6 +67,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+    bootstrap_form (4.3.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.32.0)
@@ -202,6 +211,8 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  bootstrap_form (~> 4.0)
+  bootswatch!
   byebug
   capybara (>= 2.15)
   curb

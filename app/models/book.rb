@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  has_one :genre
-  has_one :status
-  has_one :cover
+  belongs_to :genre
+  belongs_to :status, optional: true
+  belongs_to :cover, optional: true
 end

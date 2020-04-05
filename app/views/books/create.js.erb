@@ -1,0 +1,2 @@
+$("#new-book").html("<%= j render(partial: 'books/create_button') %>");
+$("#books-list").append("<%= j render(partial: 'books/book', locals: {book: @book}) %>")
