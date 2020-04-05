@@ -1,2 +1,5 @@
-$("#books-list").html("<%= j render(partial: 'books/book', collection: @books) %>")
-$("#new-book").hide()
+$("#books-list").html("<%= j render(partial: 'books/book', collection: @books) %>");
+$("#order-panel").html("<%= j render(partial: 'books/order_tab') %>");
+<% if @genre || @status || @cover %>
+  $("#new-book").hide();
+<% end %>

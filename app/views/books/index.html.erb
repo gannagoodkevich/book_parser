@@ -1,7 +1,4 @@
 <div class="my-row">
-  <%=link_to "Sort_by", books_path(order: "allaal"), remote: true %>
-</div>
-<div class="my-row">
   <div class="col-sm-3">
     <p></p>
     <%= render partial: 'genres/genre_cloud', locals: {genres: @genres} %>
@@ -18,8 +15,13 @@
       <%= render partial: 'books/create_button'%>
     </div>
     <p></p>
+    <div id="order-panel">
+      <%= render partial: 'books/order_tab' %>
+    </div>
+    <p></p>
     <div id="books-list">
       <%= render partial: 'books/book', collection: @books %>
     </div>
+    <%= paginate @books %>
   </div>
 </div>

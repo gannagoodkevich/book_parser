@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.order(title: :asc)
+    @books = Book.all
 
     if params[:genre_id]
       @genre = Genre.find_by(id: params[:genre_id])
@@ -25,9 +25,26 @@ class BooksController < ApplicationController
       @books = @cover.books
     end
 
-    if params[:order]
+    case params[:order]
+    when 'book_title_asc'
+      @books = @books.order(title: :asc)
+    when 'book_title_desc'
+      @books = @books.order(title: :desc)
+    when 'book_genre_title_asc'
+      @books = @books.includes(:genre).order('genres.title ASC')
+    when 'book_genre_title_desc'
+      @books = @books.includes(:genre).order('genres.title DESC')
+    when 'book_status_title_asc'
+      @books = @books.includes(:status).order('statuses.status_title ASC')
+    when 'book_status_title_desc'
+      @books = @books.includes(:status).order('statuses.status_title DESC')
+    when 'book_cover_title_asc'
       @books = @books.includes(:cover).order('covers.cover_type ASC')
+    when 'book_cover_title_desc'
+      @books = @books.includes(:cover).order('covers.cover_type DESC')
     end
+
+    @books = @books.page params[:page]
 
     @genres = Genre.all
     @covers = Cover.all
