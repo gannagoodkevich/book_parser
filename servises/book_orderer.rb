@@ -4,7 +4,7 @@ class BookOrederer
   end
 
   def call(param)
-    public_send(param)
+    send(param)
   end
 
   private

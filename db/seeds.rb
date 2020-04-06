@@ -1,6 +1,5 @@
 require '/media/asus/Ann/Films/servises/web_site_parser.rb'
-# TODO: refactor threads for parsing elements, not for links!!!
-#
+
 parser = WebSiteParser.new("https://biblio.by/biblio-books.html?cat=4921")
 
 parser.book_genres_links.each do |key, value|
@@ -17,21 +16,21 @@ parser.book_genres_links.each do |key, value|
   end
   genre = Genre.create!(title: key)
 
-  links_sliced = links.each_slice(4)
-  links_sliced.each do |links|
-    links.each do |link|
-      threads << Thread.new(link) do |url|
+  links.each do |link|
+    page = Nokogiri::HTML(Curl.get(link).body_str)
+    books_genres = page.search('//div[@class = "des-container"]').each_slice(4)
+    books_genres.each do |books_genre|
+      threads << Thread.new(books_genre) do |books_genre|
         begin
-          page = Nokogiri::HTML(Curl.get(url).body_str)
-          page.search('//div[@class = "des-container"]').each do |name|
+          books_genre.each do |name|
             genre.books.create!(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content)
           end
         ensure
           ActiveRecord::Base.clear_active_connections!
         end
       end
+      threads.each {|thread| thread.join}
     end
-    threads.each {|thread| thread.join}
   end
 end
 
@@ -49,21 +48,21 @@ parser.book_covers_links.each do |key, value|
   end
   cover = Cover.create!(cover_type: key)
 
-  links_sliced = links.each_slice(4)
-  links_sliced.each do |links|
-    links.each do |link|
-      threads << Thread.new(link) do |url|
+  links.each do |link|
+    page = Nokogiri::HTML(Curl.get(link).body_str)
+    books_genres = page.search('//div[@class = "des-container"]').each_slice(4)
+    books_genres.each do |books_genre|
+      threads << Thread.new(books_genre) do |books_genre|
         begin
-          page = Nokogiri::HTML(Curl.get(url).body_str)
-          page.search('//div[@class = "des-container"]').each do |name|
+          books_genre.each do |name|
             cover.books << Book.find_by(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content) if Book.find_by(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content)
           end
         ensure
           ActiveRecord::Base.clear_active_connections!
         end
       end
+      threads.each {|thread| thread.join}
     end
-    threads.each {|thread| thread.join}
   end
 end
 
@@ -81,20 +80,20 @@ parser.book_statuses_links.each do |key, value|
   end
   status = Status.create!(status_title: key)
 
-  links_sliced = links.each_slice(4)
-  links_sliced.each do |links|
-    links.each do |link|
-      threads << Thread.new(link) do |url|
+  links.each do |link|
+    page = Nokogiri::HTML(Curl.get(link).body_str)
+    books_genres = page.search('//div[@class = "des-container"]').each_slice(4)
+    books_genres.each do |books_genre|
+      threads << Thread.new(books_genre) do |books_genre|
         begin
-          page = Nokogiri::HTML(Curl.get(url).body_str)
-          page.search('//div[@class = "des-container"]').each do |name|
+          books_genre.each do |name|
             status.books << Book.find_by(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content) if Book.find_by(title: name.search('div[@class = "product-name"]').first.content, author: name.search('p[@class = "author"]').first.content)
           end
         ensure
           ActiveRecord::Base.clear_active_connections!
         end
       end
+      threads.each {|thread| thread.join}
     end
-    threads.each {|thread| thread.join}
   end
 end
