@@ -1,5 +1,5 @@
 <div class="card-body">
-  <h3 class="card-title"><%= book.title%></h3>
+  <h4 class="card-title"><%= book.title%></h4>
   <h5 class="card-title"><%= book.author%></h5>
   <p>
   <b>Genre: </b>
@@ -9,12 +9,12 @@
   <p>
   <b>Status: </b>
   <%if book.status %>
-    <%= book.status.status_title %>
+      <span class="d-md-inline-flex badge badge-pill badge-info"><%= link_to book.status.status_title, books_path(status_id: book.status.id), style: "color:#ffffff", remote: true%></span>
   <%end %>
   <p>
   <b>Cover: </b>
   <% if book.cover %>
-    <%= book.cover.cover_type %>
+      <span class="d-md-inline-flex badge badge-pill badge-primary"><%= link_to book.cover.cover_type, books_path(cover_id: book.cover.id), style: "color:#ffffff", remote: true%></span>
   <%end %>
   <p>
 

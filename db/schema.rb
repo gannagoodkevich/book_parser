@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 2020_03_31_200232) do
     t.integer "status_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["id", "author"], name: "index_books_on_id_and_author", unique: true
+    t.index ["id", "title"], name: "index_books_on_id_and_title", unique: true
+    t.index ["id"], name: "index_books_on_id", unique: true
   end
 
   create_table "covers", force: :cascade do |t|
@@ -30,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_200232) do
     t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["id"], name: "index_covers_on_id", unique: true
   end
 
   create_table "genres", force: :cascade do |t|
@@ -37,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_200232) do
     t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["id"], name: "index_genres_on_id", unique: true
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -44,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_200232) do
     t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["id"], name: "index_statuses_on_id", unique: true
   end
 
 end

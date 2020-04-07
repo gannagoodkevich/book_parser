@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  paginates_per 4
+  paginates_per 24
 
   belongs_to :genre
   belongs_to :status, optional: true
