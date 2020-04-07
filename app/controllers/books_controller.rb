@@ -1,12 +1,13 @@
 require '/media/asus/Ann/Films/servises/book_filter.rb'
 require '/media/asus/Ann/Films/servises/book_orderer.rb'
+require '/media/asus/Ann/Films/queries/book_serch_query.rb'
 
 class BooksController < ApplicationController
   before_action :books_all, only: %i[index destroy]
   before_action :genres_all, only: %i[new index edit]
   before_action :covers_all, only: %i[new index edit]
   before_action :status_all, only: %i[new index edit]
-  before_action :find_book, only: %i[edit update destroy]
+  before_action :find_book, only: %i[search edit update destroy]
 
   def new
     @book = Book.new
@@ -15,9 +16,15 @@ class BooksController < ApplicationController
   def index
     @books = BookFilter.new.call(params) if BookFilter.new.call(params)
 
+    @books = BookSearchQuery.new(@books).call(params[:search_parameter], params[:search_word]) if params[:search_word]
+
     @books = BookOrederer.new(@books).call(params[:order]) if params[:order] && BookOrederer.new(@books).call(params[:order])
 
     @books = @books.page params[:page]
+  end
+
+  def search
+    @books = BookSearchQuery(@books).call(params[:search_parameter], params[:search_word])
   end
 
   def create
@@ -38,6 +45,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy!
+    @books = @books.page params[:page]
     respond_to do |format|
       format.js
     end

@@ -1,10 +1,10 @@
 <h2>
-  Book title <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_title_asc)), remote: true %>
-  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_title_desc)), remote: true %>
-  Genre <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_genre_title_asc)), remote: true %>
-  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_genre_title_desc)), remote: true %>
-  Status <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_status_title_asc)), remote: true %>
-  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_status_title_desc)), remote: true %>
-  Cover <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_cover_title_asc)), remote: true %>
-  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id).merge(order: :book_cover_title_desc)), remote: true %>
+  Book title <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_title_asc)), remote: true %>
+  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_title_desc)), remote: true %>
+  Genre <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_genre_title_asc)), remote: true %>
+  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_genre_title_desc)), remote: true %>
+  Status <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_status_title_asc)), remote: true %>
+  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_status_title_desc)), remote: true %>
+  Cover <%=link_to image_tag('arrow_up.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_cover_title_asc)), remote: true %>
+  <%=link_to image_tag('arrow_down.png', width: "30", height: "30"), books_path(params.permit(:genre_id, :status_id, :cover_id, :search_word, :search_parameter).merge(order: :book_cover_title_desc)), remote: true %>
 </h2>

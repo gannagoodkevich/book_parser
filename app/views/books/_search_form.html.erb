@@ -1,0 +1,12 @@
+<%= bootstrap_form_with(url: books_path, method: :get, remote: true) do |form| %>
+  <%= form.search_field :search_word%>
+
+  <label class="container">By title
+    <%= check_box_tag(:search_parameter, :title) %>
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">By author
+    <%= check_box_tag(:search_parameter, :author) %>
+    <span class="checkmark"></span>
+  </label>
+<% end %>
