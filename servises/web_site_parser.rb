@@ -31,6 +31,92 @@ class WebSiteParser
     number_title_hash(@root_url.search('//dd').last.search('ol/li'))
   end
 
+  def books
+    books = {}
+    book_genres_links.each do |key, value|
+      links = []
+      threads = []
+      puts value
+      num_of_pages = book_genres_numbers[key] / 96
+      if num_of_pages == 0
+        links << value
+      else
+        num_of_pages.times do |i|
+          links << value + "&p=#{i+1}"
+        end
+      end
+      books = []
+      links.each do |link|
+        threads << Thread.new(link) do |url|
+          page = Nokogiri::HTML(Curl.get(url).body_str)
+          page.search('//div[@class = "des-container"]').each do |name|
+            new_hash = {}
+            new_hash[:title] = name.search('div[@class = "product-name"]').first.content
+            new_hash[:author] = name.search('p[@class = "author"]').first.content
+            new_hash[:genre] = key
+            books << new_hash
+          end
+       end
+      end
+      threads.each {|thread| thread.join}
+    end
+
+    book_covers_links.each do |key, value|
+      links = []
+      threads = []
+      puts value
+      num_of_pages = book_covers_numbers[key] / 96
+      if num_of_pages == 0
+        links << value
+      else
+        num_of_pages.times do |i|
+          links << value + "&p=#{i+1}"
+        end
+      end
+      links.each do |link|
+        threads << Thread.new(link) do |url|
+          page = Nokogiri::HTML(Curl.get(url).body_str)
+          page.search('//div[@class = "des-container"]').each do |name|
+            title = name.search('div[@class = "product-name"]').first.content
+            author = name.search('p[@class = "author"]').first.content
+            my_hash = books.select {|book| book[:title].eql?(title) && book[:author].eql?(author) }
+            # puts my_hash.inspect
+            my_hash.first[:cover] = key unless my_hash.empty?
+          end
+        end
+      end
+      threads.each {|thread| thread.join}
+    end
+
+    book_statuses_links.each do |key, value|
+      links = []
+      threads = []
+      puts value
+      num_of_pages = book_statuses_numbers[key] / 96
+      if num_of_pages == 0
+        links << value
+      else
+        num_of_pages.times do |i|
+          links << value + "&p=#{i+1}"
+        end
+      end
+      links.each do |link|
+        threads << Thread.new(link) do |url|
+          page = Nokogiri::HTML(Curl.get(url).body_str)
+          page.search('//div[@class = "des-container"]').each do |name|
+            title = name.search('div[@class = "product-name"]').first.content
+            author = name.search('p[@class = "author"]').first.content
+            my_hash = books.select {|book| book[:title].eql?(title) && book[:author].eql?(author) }
+            my_hash.first[:status] = key unless my_hash.empty?
+          end
+        end
+      end
+      threads.each {|thread| thread.join}
+    end
+
+    books
+  end
+
   private
 
   def link_title_hash(tags)
