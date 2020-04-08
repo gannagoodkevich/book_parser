@@ -32,7 +32,7 @@ class WebSiteParser
   end
 
   def books
-    books = {}
+    books = []
     book_genres_links.each do |key, value|
       links = []
       threads = []
@@ -45,7 +45,7 @@ class WebSiteParser
           links << value + "&p=#{i+1}"
         end
       end
-      books = []
+      #books = []
       links.each do |link|
         threads << Thread.new(link) do |url|
           page = Nokogiri::HTML(Curl.get(url).body_str)
