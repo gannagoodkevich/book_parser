@@ -22,6 +22,7 @@ gem 'curb'
 gem "bootswatch", github: "thomaspark/bootswatch"
 gem "bootstrap_form", "~> 4.0"
 gem 'kaminari'
+gem 'activerecord-import'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

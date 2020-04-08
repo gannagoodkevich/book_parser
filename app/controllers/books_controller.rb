@@ -1,7 +1,3 @@
-require '/media/asus/Ann/Films/servises/book_filter.rb'
-require '/media/asus/Ann/Films/servises/book_orderer.rb'
-require '/media/asus/Ann/Films/queries/book_serch_query.rb'
-
 class BooksController < ApplicationController
   before_action :books_all, only: %i[index destroy]
   before_action :genres_all, only: %i[new index edit]
