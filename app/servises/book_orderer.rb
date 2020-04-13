@@ -1,4 +1,4 @@
-class BookOrederer
+class BookOrderer
   def initialize(books)
     @books = books
   end

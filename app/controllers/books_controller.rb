@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
     @books = BookSearchQuery.new(@books).call(params[:search_parameter], params[:search_word]) if params[:search_word]
 
-    @books = BookOrederer.new(@books).call(params[:order]) if params[:order] && BookOrederer.new(@books).call(params[:order])
+    @books = BookOrderer.new(@books).call(params[:order]) if params[:order] && BookOrderer.new(@books).call(params[:order])
 
     @books = @books.page params[:page]
   end
